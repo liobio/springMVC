@@ -6,6 +6,16 @@
 </head>
 <body>
 <h1 align="center">LIOBO</h1>
-<a th:href="@{/target}" >首页</a>
+<a th:href="@{/target}" >进入target页面</a><br>
+<a th:href="@{/liobio/hello}">测试RequestMapping注解的位置</a><br>
+<a th:href="@{/testRequestMapping}">测试RequestMapping注解的value属性-->/testRequestMapping</a><br>
+<a th:href="@{/test}">测试RequestMapping注解的value属性-->/test</a><br>
+<form th:action="@{/test}" method="post">
+    <input type="submit" value="测试RequestMapping注解的method属性-->POST">
+</form>
+<a th:href="@{/testGetMapping}">测试GetMapping注解-->/testGetMapping</a><br>
+<form th:action="@{/testPut}" method="put">
+    <input type="submit" value="测试form表单是否能够发送put或delete请求方式">
+</form>
 </body>
-</html>0
+</html>
