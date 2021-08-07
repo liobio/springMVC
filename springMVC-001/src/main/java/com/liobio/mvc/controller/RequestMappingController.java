@@ -2,6 +2,7 @@ package com.liobio.mvc.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -71,4 +72,41 @@ public class RequestMappingController {
     public String testPut() {
         return "success";
     }
+
+
+    //@RequestMapping注解的headers属性通过请求的请求头信息匹配请求映射
+    //
+    //@RequestMapping注解的headers属性是一个字符串类型的数组，可以通过四种表达式设置请求头信息和请求映射的匹配关系
+    @RequestMapping(
+            value = "/testParamsAndHeaders",
+            params = {"username","password!=123456"},
+            headers = {"Host=localhost:8080"}
+    )
+    public String testParamsAndHeaders(){
+        return "success";
+    }
+
+
+    //  SpringMVC支持ant风格的路径
+    //
+    //  ？：表示任意的单个字符
+    //
+    //  *：表示任意的0个或多个字符
+    //
+    //  \**：表示任意的一层或多层目录
+    //
+    //  注意：在使用\**时，只能使用/**/xxx的方式
+    //@RequestMapping("/a?a/testAnt")
+    //@RequestMapping("/a*a/testAnt")
+    @RequestMapping("/**/testAnt")
+    public String testAnt(){
+        return "success";
+    }
+
+    @RequestMapping("/testRest/{id}/{username}")
+    public String testRest(@PathVariable("id") String id, @PathVariable("username") String username){
+        System.out.println("id:"+id+",username:"+username);
+        return "success";
+    }
+    //最终输出的内容为-->id:1,username:admin
 }

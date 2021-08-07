@@ -6,7 +6,8 @@
 </head>
 <body>
 <h1 align="center">LIOBO</h1>
-<a th:href="@{/target}" >进入target页面</a><br>
+<a th:href="@{/target}">进入target页面</a><br>
+<a th:href="@{/param}">test_param</a><br>
 <a th:href="@{/liobio/hello}">测试RequestMapping注解的位置</a><br>
 <a th:href="@{/testRequestMapping}">测试RequestMapping注解的value属性-->/testRequestMapping</a><br>
 <a th:href="@{/test}">测试RequestMapping注解的value属性-->/test</a><br>
@@ -17,5 +18,13 @@
 <form th:action="@{/testPut}" method="put">
     <input type="submit" value="测试form表单是否能够发送put或delete请求方式">
 </form>
+
+<a th:href="@{/testParamsAndHeaders(username='admin',password=123)}">测试RequestMapping注解的params属性-->/testParamsAndHeaders</a><br>
+<a th:href="@{/a1a/testAnt}">测试@RequestMapping可以匹配ant风格的路径-->使用?</a><br>
+<a th:href="@{/a1a/testAnt}">测试@RequestMapping可以匹配ant风格的路径-->使用*</a><br>
+<a th:href="@{/a1a/testAnt}">测试@RequestMapping可以匹配ant风格的路径-->使用**</a><br>
+<a th:href="@{/testRest/1/admin}">测试路径中的占位符-->/testRest</a><br>
+
+
 </body>
-</html>0
+</html>

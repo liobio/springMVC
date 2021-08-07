@@ -23,5 +23,10 @@ public class MyController {
         return "target";
     }
 
+    @RequestMapping("/param")
+    public String param(){
+        return "test_param";
+    }
+
 
 }
