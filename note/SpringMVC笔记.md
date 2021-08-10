@@ -630,16 +630,38 @@ public String testModelMap(ModelMap modelMap){
 }
 ```
 
-### 6、Model、ModelMap、Map的关系
+### 6、Model、ModelMap、Map、ModelAndView的关系
 
 Model、ModelMap、Map类型的参数其实本质上都是 BindingAwareModelMap 类型的
 
-```
+![image-20210809145755154](C:\Users\LIOBIO\AppData\Roaming\Typora\typora-user-images\image-20210809145755154.png)
+
+
+
+![image-20210809150057175](C:\Users\LIOBIO\AppData\Roaming\Typora\typora-user-images\image-20210809150057175.png)
+
+![image-20210809150226877](C:\Users\LIOBIO\AppData\Roaming\Typora\typora-user-images\image-20210809150226877.png)
+
+![image-20210809150442019](C:\Users\LIOBIO\AppData\Roaming\Typora\typora-user-images\image-20210809150442019.png)
+
+```java
 public interface Model{}
 public class ModelMap extends LinkedHashMap<String, Object> {}
 public class ExtendedModelMap extends ModelMap implements Model {}
 public class BindingAwareModelMap extends ExtendedModelMap {}
 ```
+
+无论用什么类型的方法进入一个视图时，都会把模型和视图数据封装到一个ModelAndView中进行处理
+
+![image-20210809154250915](C:\Users\LIOBIO\AppData\Roaming\Typora\typora-user-images\image-20210809154250915.png)
+
+![image-20210809154325738](C:\Users\LIOBIO\AppData\Roaming\Typora\typora-user-images\image-20210809154325738.png)
+
+![image-20210809154017446](C:\Users\LIOBIO\AppData\Roaming\Typora\typora-user-images\image-20210809154017446.png)
+
+![image-20210809153939211](C:\Users\LIOBIO\AppData\Roaming\Typora\typora-user-images\image-20210809153939211.png)
+
+![image-20210809154106050](C:\Users\LIOBIO\AppData\Roaming\Typora\typora-user-images\image-20210809154106050.png)
 
 ### 7、向session域共享数据
 
@@ -677,13 +699,19 @@ SpringMVC视图的种类很多，默认有转发视图和重定向视图
 当控制器方法中所设置的视图名称没有任何前缀时，此时的视图名称会被SpringMVC配置文件中所配置的视图解析器解析，视图名称拼接视图前缀和视图后缀所得到的最终路径，会通过转发的方式实现跳转
 
 ```java
-@RequestMapping("/testHello")
-public String testHello(){
-    return "hello";
-}
+    @RequestMapping("/testThymeleafView")
+    public String testThymeleafView(){
+        return "success";
+    }
 ```
 
-![](img/img002.png)
+<img src="C:\Users\LIOBIO\AppData\Roaming\Typora\typora-user-images\image-20210809191651510.png" alt="image-20210809191651510"  />
+
+**locale** 是跟本地化的相关的，表达关于本地化文件的信息
+
+然后resloverViewName方法根据视图名称解析视图
+
+
 
 ### 2、转发视图
 
@@ -693,16 +721,22 @@ SpringMVC中创建转发视图的情况：
 
 当控制器方法中所设置的视图名称以"forward:"为前缀时，创建InternalResourceView视图，此时的视图名称不会被SpringMVC配置文件中所配置的视图解析器解析，而是会将前缀"forward:"去掉，剩余部分作为最终路径通过转发的方式实现跳转
 
+*整个过程中会创建两次视图*
+
 例如"forward:/"，"forward:/employee"
 
 ```java
-@RequestMapping("/testForward")
-public String testForward(){
-    return "forward:/testHello";
-}
+    @RequestMapping("/testForward")
+    public String testForward(){
+        return "forward:/testThymeleafView";
+    }
 ```
 
-![image-20210706201316593](img/img003.png)
+![image-20210809193352849](C:\Users\LIOBIO\AppData\Roaming\Typora\typora-user-images\image-20210809193352849.png)
+
+![image-20210809193810229](C:\Users\LIOBIO\AppData\Roaming\Typora\typora-user-images\image-20210809193810229.png)
+
+​                                                                                      **整个过程中会创建两次视图**
 
 ### 3、重定向视图
 
@@ -718,8 +752,6 @@ public String testRedirect(){
     return "redirect:/testHello";
 }
 ```
-
-![image-20210706201602267](img/img004.png)
 
 > 注：
 >

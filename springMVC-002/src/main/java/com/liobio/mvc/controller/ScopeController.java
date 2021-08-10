@@ -1,5 +1,16 @@
 package com.liobio.mvc.controller;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.Map;
+
 /**
  * @author LIOBIO
  * @version 1.0.0
@@ -7,6 +18,64 @@ package com.liobio.mvc.controller;
  * @createTime 2021/08/08/13:48:00
  * @Description
  */
+@Controller
 public class ScopeController {
+
+    //    使用ServletAPI向request域对象共享数据
+    @RequestMapping("/testRequestByServletAPI")
+    public String testRequestByServletAPI(HttpServletRequest request){
+        request.setAttribute("testRequestScope","hello,testRequestByServletAPI");
+        return "success";
+    }
+    //使用ModelAndView向request域对象共享数据
+    @RequestMapping("/testModelAndView")
+    public ModelAndView testModelAndView(){
+        /**
+         * ModelAndView有Model和View的功能
+         * Model主要用于向请求域共享数据
+         * View主要用于设置视图，实现页面跳转
+         */
+        ModelAndView mav = new ModelAndView();
+        //向请求域共享数据
+        mav.addObject(" testRequestScope", "hello,ModelAndView");
+        //设置视图，实现页面跳转
+        mav.setViewName("success");
+        return mav;
+    }
+    //使用Model向request域对象共享数据
+    @RequestMapping("/testModel")
+    public String testModel(Model model){
+        model.addAttribute("testScope", "hello,Model");
+        System.out.println(model.getClass().getName());
+        return "success";
+    }
+    //使用map向request域对象共享数据
+    @RequestMapping("/testMap")
+    public String testMap(Map<String, Object> map){
+        map.put("testScope", "hello,Map");
+        System.out.println(map.getClass().getName());
+        return "success";
+    }
+    @RequestMapping("/testModelMap")
+    public String testModelMap(ModelMap modelMap){
+        modelMap.addAttribute("testRequestScope", "hello,ModelMap");
+        System.out.println(modelMap.getClass().getName());
+        return "success";
+
+    }
+    @RequestMapping("/testSession")
+    public String testSession(HttpSession session){
+        session.setAttribute("testSessionScope", "hello,session");
+        return "success";
+    }
+
+    @RequestMapping("/testApplication")
+    public String testApplication(HttpSession session){
+        ServletContext application = session.getServletContext();
+        application.setAttribute("testApplicationScope", "hello,application");
+        return "success";
+    }
+
+
 
 }
