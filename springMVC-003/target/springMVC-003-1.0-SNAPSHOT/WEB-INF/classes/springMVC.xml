@@ -28,17 +28,6 @@
         </property>
     </bean>
 
-    <mvc:view-controller path="/" view-name="index"></mvc:view-controller>
-    <mvc:view-controller path="/file" view-name="file"></mvc:view-controller>
-
-    <mvc:default-servlet-handler />
-
-    <!--开启mvc的注解驱动-->
-    <mvc:annotation-driven />
-
-    <!--配置文件上传解析器，将上传的文件封装为MultipartFile-->
-    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"></bean>
-
     <!--
        处理静态资源，例如html、js、css、jpg
       若只设置该标签，则只能访问静态资源，其他请求则无法访问
