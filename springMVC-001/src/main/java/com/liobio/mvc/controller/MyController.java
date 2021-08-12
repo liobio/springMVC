@@ -18,13 +18,14 @@ public class MyController {
         //设置视图名称
         return "index";
     }
+
     @RequestMapping("/target")
     public String toTarget() {
         return "target";
     }
 
     @RequestMapping("/param")
-    public String param(){
+    public String param() {
         return "test_param";
     }
 

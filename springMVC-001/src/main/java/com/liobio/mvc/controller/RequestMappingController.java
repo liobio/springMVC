@@ -79,10 +79,10 @@ public class RequestMappingController {
     //@RequestMapping注解的headers属性是一个字符串类型的数组，可以通过四种表达式设置请求头信息和请求映射的匹配关系
     @RequestMapping(
             value = "/testParamsAndHeaders",
-            params = {"username","password!=123456"},
+            params = {"username", "password!=123456"},
             headers = {"Host=localhost:8080"}
     )
-    public String testParamsAndHeaders(){
+    public String testParamsAndHeaders() {
         return "success";
     }
 
@@ -99,13 +99,13 @@ public class RequestMappingController {
     //@RequestMapping("/a?a/testAnt")
     //@RequestMapping("/a*a/testAnt")
     @RequestMapping("/**/testAnt")
-    public String testAnt(){
+    public String testAnt() {
         return "success";
     }
 
     @RequestMapping("/testRest/{id}/{username}")
-    public String testRest(@PathVariable("id") String id, @PathVariable("username") String username){
-        System.out.println("id:"+id+",username:"+username);
+    public String testRest(@PathVariable("id") String id, @PathVariable("username") String username) {
+        System.out.println("id:" + id + ",username:" + username);
         return "success";
     }
     //最终输出的内容为-->id:1,username:admin

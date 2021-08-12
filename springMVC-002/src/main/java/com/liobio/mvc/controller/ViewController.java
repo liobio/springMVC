@@ -14,17 +14,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ViewController {
 
     @RequestMapping("/testThymeleafView")
-    public String testThymeleafView(){
+    public String testThymeleafView() {
         return "success";
     }
 
     @RequestMapping("/testForward")
-    public String testForward(){
+    public String testForward() {
         return "forward:/testThymeleafView";
     }
 
     @RequestMapping("/testRedirect")
-    public String testRedirect(){
+    public String testRedirect() {
         return "redirect:/testThymeleafView";
     }
 }

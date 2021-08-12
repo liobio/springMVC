@@ -23,13 +23,14 @@ public class ScopeController {
 
     //    使用ServletAPI向request域对象共享数据
     @RequestMapping("/testRequestByServletAPI")
-    public String testRequestByServletAPI(HttpServletRequest request){
-        request.setAttribute("testRequestScope","hello,testRequestByServletAPI");
+    public String testRequestByServletAPI(HttpServletRequest request) {
+        request.setAttribute("testRequestScope", "hello,testRequestByServletAPI");
         return "success";
     }
+
     //使用ModelAndView向request域对象共享数据
     @RequestMapping("/testModelAndView")
-    public ModelAndView testModelAndView(){
+    public ModelAndView testModelAndView() {
         /**
          * ModelAndView有Model和View的功能
          * Model主要用于向请求域共享数据
@@ -42,40 +43,43 @@ public class ScopeController {
         mav.setViewName("success");
         return mav;
     }
+
     //使用Model向request域对象共享数据
     @RequestMapping("/testModel")
-    public String testModel(Model model){
+    public String testModel(Model model) {
         model.addAttribute("testScope", "hello,Model");
         System.out.println(model.getClass().getName());
         return "success";
     }
+
     //使用map向request域对象共享数据
     @RequestMapping("/testMap")
-    public String testMap(Map<String, Object> map){
+    public String testMap(Map<String, Object> map) {
         map.put("testScope", "hello,Map");
         System.out.println(map.getClass().getName());
         return "success";
     }
+
     @RequestMapping("/testModelMap")
-    public String testModelMap(ModelMap modelMap){
+    public String testModelMap(ModelMap modelMap) {
         modelMap.addAttribute("testRequestScope", "hello,ModelMap");
         System.out.println(modelMap.getClass().getName());
         return "success";
 
     }
+
     @RequestMapping("/testSession")
-    public String testSession(HttpSession session){
+    public String testSession(HttpSession session) {
         session.setAttribute("testSessionScope", "hello,session");
         return "success";
     }
 
     @RequestMapping("/testApplication")
-    public String testApplication(HttpSession session){
+    public String testApplication(HttpSession session) {
         ServletContext application = session.getServletContext();
         application.setAttribute("testApplicationScope", "hello,application");
         return "success";
     }
-
 
 
 }
