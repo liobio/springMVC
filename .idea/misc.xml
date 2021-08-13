@@ -5,6 +5,7 @@
     <file type="web" url="file://$PROJECT_DIR$/springMVC-001" />
     <file type="web" url="file://$PROJECT_DIR$/springMVC-002" />
     <file type="web" url="file://$PROJECT_DIR$/springMVC-003" />
+    <file type="web" url="file://$PROJECT_DIR$/springMVC-004" />
     <file type="web" url="file://$PROJECT_DIR$/springMVC-rest" />
   </component>
   <component name="MavenProjectsManager">
@@ -15,6 +16,7 @@
         <option value="$PROJECT_DIR$/springMVC-002/pom.xml" />
         <option value="$PROJECT_DIR$/springMVC-rest/pom.xml" />
         <option value="$PROJECT_DIR$/springMVC-003/pom.xml" />
+        <option value="$PROJECT_DIR$/springMVC-004/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
