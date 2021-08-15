@@ -69,7 +69,7 @@ public class WebConfig implements WebMvcConfigurer {
     // 7、配置文件上传解析器
     @Bean
     public MultipartResolver multipartResolver(){
-        CommonsMultipartResolver commonsMultipartResolver=new CommonsMultipartResolver()
+        CommonsMultipartResolver commonsMultipartResolver=new CommonsMultipartResolver();
         return commonsMultipartResolver;
     }
     // 8、视图解析器
