@@ -10,6 +10,7 @@
         <module name="springMVC-003" />
         <module name="springMVC-002" />
         <module name="springMVC-004" />
+        <module name="springMVC-annotation" />
         <module name="springMVC-rest" />
       </profile>
     </annotationProcessing>
