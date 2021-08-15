@@ -28,36 +28,52 @@ import java.util.Properties;
  * @createTime 2021/08/15/16:23:00
  * @Description
  * 代替SpringMVC的配置文件：
- * 1、扫描组件   2、视图解析器     3、view-controller    4、default-servlet-handler
- * 5、mvc注解驱动    6、文件上传解析器   7、异常处理      8、拦截器
+ * 1、扫描组件   2、mvc注解驱动     3、拦截器   4、view-controller
+ * 5、default-servlet-handler   6、异常处理    7、文件上传解析器     8、视图解析器
  */
 @Configuration
 //1、扫描组件
 @ComponentScan("com.liobio.mvc.controller")
-//5、mvc注解驱动
+//2、mvc注解驱动
 @EnableWebMvc
 public class WebConfig implements WebMvcConfigurer {
 
+    //3、拦截器
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         TestInterceptor testInterceptor = new TestInterceptor();
         registry.addInterceptor(testInterceptor).addPathPatterns("/**");
     }
+    // 4、view-controller
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/hello").setViewName("hello");
     }
+    // 5、default-servlet-handler
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();
     }
-    //配置文件上传解析器
-    @Bean
-    public CommonsMultipartResolver multipartResolver(){
-        return new CommonsMultipartResolver();
+    // 6、异常处理
+    @Override
+    public void configureHandlerExceptionResolvers(List<HandlerExceptionResolver> resolvers) {
+        SimpleMappingExceptionResolver exceptionResolver=new SimpleMappingExceptionResolver();
+        Properties properties =new Properties();
+        properties.setProperty("java.lang.ArithmeticException","error");
+
+        exceptionResolver.setExceptionMappings(properties);
+        exceptionResolver.setExceptionAttribute("exception");
+        resolvers.add(exceptionResolver);
     }
 
-    //配置生成模板解析器
+    // 7、配置文件上传解析器
+    @Bean
+    public MultipartResolver multipartResolver(){
+        CommonsMultipartResolver commonsMultipartResolver=new CommonsMultipartResolver()
+        return commonsMultipartResolver;
+    }
+    // 8、视图解析器
+    // 配置生成模板解析器
     @Bean
     public ITemplateResolver templateResolver() {
         WebApplicationContext webApplicationContext = ContextLoader.getCurrentWebApplicationContext();
